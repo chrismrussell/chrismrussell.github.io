@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chris Russell — Head of Customer Success</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --surface: #141414;
+    --border: #1e1e1e;
+    --amber: #E8A020;
+    --amber-dim: #7a5010;
+    --white: #f0ece4;
+    --muted: #555;
+    --text: #999;
+    --serif: 'Playfair Display', serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  nav { display: flex; gap: 20px; }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    padding: 96px 20px 56px;
+    border-bottom: 1px solid var(--border);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 28px;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 13vw, 120px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--amber); }
+
+  .hero-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.6s;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.75s;
+  }
+
+  .stat {
+    padding: 18px 14px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(22px, 6vw, 34px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  .sec { padding: 56px 20px; border-bottom: 1px solid var(--border); }
+  .sec-alt { background: var(--surface); }
+
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+
+  /* POSITION CARDS */
+  .pos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .pos-card {
+    background: var(--black);
+    padding: 24px 20px;
+  }
+
+  .sec-alt .pos-card { background: var(--surface); }
+
+  .pos-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+
+  .pos-card h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .pos-card p { font-size: 13px; line-height: 1.65; color: var(--text); }
+
+  /* TOOL CARDS */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .tool-card {
+    background: var(--surface);
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .tool-card:hover::before { transform: scaleX(1); }
+
+  .tool-icon { font-size: 22px; display: block; margin-bottom: 12px; }
+
+  .tool-card h4 {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .tool-card p { font-size: 13px; line-height: 1.65; color: #777; }
+
+  .tool-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-transform: uppercase;
+    border: 1px solid var(--amber-dim);
+    padding: 3px 7px;
+  }
+
+  /* METRICS */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .metric { background: var(--black); padding: 24px 16px; text-align: center; }
+
+  .metric-val {
+    font-family: var(--serif);
+    font-size: clamp(32px, 9vw, 52px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-val span { color: var(--amber); }
+
+  .metric-desc {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* BULLETS */
+  .bullets-list { border: 1px solid var(--border); }
+
+  .bullet-item {
+    padding: 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .bullet-item:last-child { border-bottom: none; }
+
+  .bullet-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--amber);
+    padding-top: 2px;
+    letter-spacing: 0.1em;
+  }
+
+  .bullet-text { font-size: 13px; line-height: 1.7; color: #bbb; }
+  .bullet-text strong { color: var(--white); font-weight: 500; }
+
+  /* QUOTE */
+  .philosophy { background: var(--surface); padding: 56px 20px; border-bottom: 1px solid var(--border); }
+
+  blockquote {
+    font-family: var(--serif);
+    font-size: clamp(18px, 5vw, 28px);
+    font-style: italic;
+    line-height: 1.4;
+    border-left: 3px solid var(--amber);
+    padding-left: 20px;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+
+  .quote-attr {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-left: 20px;
+  }
+
+  /* CONTACT */
+  .contact-sec { padding: 56px 20px; border-bottom: 1px solid var(--border); }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 10vw, 72px);
+    font-weight: 900;
+    line-height: 0.95;
+    margin-bottom: 36px;
+  }
+
+  .contact-title em { font-style: italic; color: var(--amber); }
+
+  .contact-links { display: flex; flex-direction: column; }
+
+  .contact-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+
+  .contact-link:last-child { border-bottom: none; }
+  .contact-link:hover { color: var(--amber); }
+  .contact-link::before { content: '→'; color: var(--amber); }
+
+  /* FOOTER */
+  footer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  footer span {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* TABLET */
+  @media (min-width: 600px) {
+    header { padding: 18px 32px; }
+    .hero { padding: 108px 32px 64px; }
+    .sec, .contact-sec { padding: 72px 32px; }
+    .philosophy { padding: 72px 32px; }
+    footer { padding: 22px 32px; flex-direction: row; justify-content: space-between; align-items: center; }
+    .pos-grid { grid-template-columns: repeat(2, 1fr); }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    nav a { font-size: 10px; }
+    .logo { font-size: 11px; }
+  }
+
+  /* DESKTOP */
+  @media (min-width: 1024px) {
+    header { padding: 20px 56px; }
+    nav { gap: 32px; }
+    nav a { font-size: 11px; }
+    .hero { padding: 120px 56px 80px; gap: 36px; }
+    .sec, .contact-sec { padding: 96px 56px; }
+    .philosophy { padding: 96px 56px; }
+    footer { padding: 24px 56px; }
+    .pos-grid { grid-template-columns: repeat(2, 1fr); }
+    .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    .metrics-grid { grid-template-columns: repeat(4, 1fr); }
+    .pos-card { padding: 40px 36px; }
+    .tool-card { padding: 36px 32px; }
+    .metric { padding: 36px 24px; }
+    .bullet-item { padding: 28px 24px; grid-template-columns: 40px 1fr; }
+    .hero-stats .stat { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Chris Russell</div>
+  <nav>
+    <a href="#positioning">Work</a>
+    <a href="#ai-tools">AI</a>
+    <a href="#impact">Impact</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">Head of Customer Success · Music Industry Tech</div>
+  <h1>CS leader who <em>ships</em> AI-powered systems.</h1>
+  <p class="hero-desc">I don't just manage customer success — I build the infrastructure that makes it scale. 4 years at the intersection of CS strategy, AI tooling, and music industry domain expertise.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Monthly convos managed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">&lt;3m</span>
+      <span class="stat-label">Avg response time</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">85%+</span>
+      <span class="stat-label">CX score sustained</span>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="positioning">
+  <div class="sec-label">What I bring</div>
+  <div class="pos-grid reveal">
+    <div class="pos-card"><div class="pos-num">01</div><h3>AI Ops Leadership</h3><p>I've already built the lean, AI-enabled CS model that most teams are still planning for. Small team, high output, measurable results — running it in production today.</p></div>
+    <div class="pos-card"><div class="pos-num">02</div><h3>Domain Intelligence</h3><p>Deep expertise in music industry SaaS — artist workflows, fan engagement, SMS/email compliance, ticketing integrations. The nuance that takes years to build.</p></div>
+    <div class="pos-card"><div class="pos-num">03</div><h3>Systems Thinking</h3><p>I design CS infrastructure: health score models, voice-of-customer signal systems, churn playbooks, onboarding frameworks. Not just process — architecture.</p></div>
+    <div class="pos-card"><div class="pos-num">04</div><h3>Cross-functional Leadership</h3><p>Monthly company-wide reporting, product feedback loops, sales collaboration, hiring and team development. CS as a strategic function, not a support desk.</p></div>
+  </div>
+</div>
+
+<div class="sec sec-alt" id="ai-tools">
+  <div class="sec-label">AI Systems Built</div>
+  <div class="tools-grid reveal">
+    <div class="tool-card"><span class="tool-icon">⚡</span><h4>Churn Recovery Bot</h4><p>Slack-integrated workflow: CS team triggers churn outreach via emoji → AI selects template by churn reason → instant Intercom email + Calendly save-call link sent automatically.</p><span class="tool-tag">Slack + Intercom + Claude</span></div>
+    <div class="tool-card"><span class="tool-icon">📡</span><h4>Voice of Customer Signals</h4><p>Scheduled Claude task mines Intercom conversations to surface hidden product gaps — translating raw support data into strategic product recommendations.</p><span class="tool-tag">Claude Scheduled Tasks</span></div>
+    <div class="tool-card"><span class="tool-icon">🏥</span><h4>Health Score v2</h4><p>Proprietary scoring system segmenting 5,500+ customers into Critical / Idle / Good / Great — enabling differentiated CS playbooks rather than generic at-risk treatment.</p><span class="tool-tag">PostHog + Custom Logic</span></div>
+    <div class="tool-card"><span class="tool-icon">📊</span><h4>CS Intelligence Dashboard</h4><p>Live PostHog dashboard tracking onboarding cohort health, setup completion, and usage signals — visibility into customer trajectory post-onboarding call.</p><span class="tool-tag">PostHog + Database</span></div>
+    <div class="tool-card"><span class="tool-icon">🤖</span><h4>CS Intercom Assistant</h4><p>AI assistant in Slack delivering weekly KPIs, customer-specific queries, and aggregate conversation trends — removing manual reporting overhead entirely.</p><span class="tool-tag">Intercom AI + Claude</span></div>
+    <div class="tool-card"><span class="tool-icon">🚨</span><h4>Deliverability Alerts</h4><p>Proactive Twilio monitoring that flags unregistered numbers and failed sends before customers experience campaign failures and request refunds.</p><span class="tool-tag">Twilio + Intercom + Slack</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">By the numbers</div>
+  <div class="metrics-grid reveal">
+    <div class="metric"><div class="metric-val">476<span>+</span></div><div class="metric-desc">Convos<br>/ month</div></div>
+    <div class="metric"><div class="metric-val">36<span>+</span></div><div class="metric-desc">Onboarding<br>calls / mo</div></div>
+    <div class="metric"><div class="metric-val">85<span>%</span></div><div class="metric-desc">Peak CX<br>score</div></div>
+    <div class="metric"><div class="metric-val">2<span>m</span></div><div class="metric-desc">Avg first<br>response</div></div>
+  </div>
+</div>
+
+<div class="sec" id="impact">
+  <div class="sec-label">Key Accomplishments</div>
+  <div class="bullets-list reveal">
+    <div class="bullet-item"><span class="bullet-num">01</span><div class="bullet-text"><strong>Built a full AI-powered CS operations stack</strong> — churn recovery automation, health scoring, voice-of-customer intelligence, and real-time assistant tools — enabling 2 humans + AI to outperform larger traditional CS orgs on efficiency and CX.</div></div>
+    <div class="bullet-item"><span class="bullet-num">02</span><div class="bullet-text"><strong>Designed a proprietary Customer Health Score system (v1 → v2)</strong> that evolved into a live signal with four customer tiers — enabling targeted CS playbooks across 5,500+ customers.</div></div>
+    <div class="bullet-item"><span class="bullet-num">03</span><div class="bullet-text"><strong>Led full department build-out</strong> — recruited, onboarded, and coached CS team to 85%+ CX scores and sub-3-minute response times. Launched Office Hours and scalable video onboarding library.</div></div>
+    <div class="bullet-item"><span class="bullet-num">04</span><div class="bullet-text"><strong>Delivered monthly company-wide CS intelligence reports</strong> synthesizing KPIs, churn trends, and Voice of Customer signals — translated into product fixes adopted by engineering.</div></div>
+    <div class="bullet-item"><span class="bullet-num">05</span><div class="bullet-text"><strong>Positioned CS as a revenue-protecting function</strong> by building infrastructure that scales without headcount — AI-enabled CS leadership creates compounding leverage, not linear cost.</div></div>
+  </div>
+</div>
+
+<div class="philosophy">
+  <div class="reveal">
+    <blockquote>"The CS teams of the future are small, AI-enabled, and built on judgment — not headcount. I've been running that team for the past two years."</blockquote>
+    <div class="quote-attr">— Chris Russell, Head of Customer Success</div>
+  </div>
+</div>
+
+<div class="contact-sec" id="contact">
+  <div class="sec-label">Let's connect</div>
+  <div class="reveal">
+    <h2 class="contact-title">Open to the <em>right</em> opportunity.</h2>
+    <div class="contact-links">
+      <a href="mailto:cmr1991@gmail.com" class="contact-link">cmr1991@gmail.com</a>
+      <a href="https://linkedin.com/in/chrisrussell" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="#" class="contact-link">Download Resume</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Chris Russell · Head of Customer Success · Seattle, WA</span>
+  <span>2026</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
